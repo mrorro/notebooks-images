@@ -4,7 +4,7 @@ on:
   push:
     # only pushes on master so we don't push intermediate results to dockerhub
     branches:
-    - master
+    - main
   pull_request:
 
 jobs:
