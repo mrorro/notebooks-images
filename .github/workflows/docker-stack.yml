@@ -81,7 +81,7 @@ jobs:
           tags: ${{ steps.docker_meta_scipy-notebook.outputs.tags }}
           labels: ${{ steps.docker_meta_scipy-notebook.outputs.labels }}
           build-args: |
-           BASE_CONTAINER=marorro/base-notebook
+           BASE_CONTAINER=marorro/minimal-notebook
 
       - name: Docker meta datascience-notebook
         id: docker_meta_datascience-notebook
