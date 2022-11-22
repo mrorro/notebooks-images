@@ -37,7 +37,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: https://raw.githubusercontent.com/jupyter/docker-stacks/main/docker-stacks-foundation/Dockerfile
+          context: https://github.com/jupyter/docker-stacks/tree/main/docker-stacks-foundation
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
