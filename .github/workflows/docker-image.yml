@@ -8,6 +8,38 @@ on:
   pull_request:
 
 jobs:
+
+  x86_64-cuda-foundation:
+    name: Build cuda jupyter docker-stacks
+    runs-on: ubuntu-latest
+    outputs:
+      base: ${{ steps.docker_meta_base.outputs.tags }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          images: jupyter/docker-stacks/docker-stacks-foundation/
+          tags: |
+            type=sha
+            latest
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+        if: github.event_name != 'pull_request'
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.docker_meta.outputs.tags }}
+          labels: ${{ steps.docker_meta.outputs.labels }}
+
+ 
   user-images:
     name: Build and push images
     runs-on: ubuntu-latest
