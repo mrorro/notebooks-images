@@ -9,7 +9,7 @@ on:
 
 jobs:
 
-  cuda-foundation:
+  x86_64_cuda-foundation:
     name: Build and push images
     runs-on: ubuntu-latest
 
@@ -36,7 +36,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
         if: github.event_name != 'pull_request'
-      - name: Build and push
+      - name: Build and push docker-stacks-foundation
         uses: docker/build-push-action@v3
         with:
           context: docker-stacks-foundation
@@ -45,3 +45,13 @@ jobs:
           labels: ${{ steps.docker_meta.outputs.labels }}
           build-args: |
            ROOT_CONTAINER=nvidia/cuda:11.4.2-cudnn8-runtime-ubuntu20.04
+
+      - name: Build and push x86_64-base
+        uses: docker/build-push-action@v3
+        with:
+          context: base-notebook
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.docker_meta.outputs.tags }}
+          labels: ${{ steps.docker_meta.outputs.labels }}
+          build-args: |
+           ROOT_CONTAINER=marorro/docker-stacks-foundation
