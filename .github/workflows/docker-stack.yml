@@ -81,3 +81,39 @@ jobs:
           labels: ${{ steps.docker_meta_minimal-notebook.outputs.labels }}
           build-args: |
            BASE_CONTAINER=marorro/base-notebook
+
+      - name: Docker meta scipy-notebook
+        id: docker_meta_scipy-notebook
+        uses: docker/metadata-action@v4
+        with:
+          images: marorro/scipy-notebook
+          tags: |
+            type=sha
+            latest
+      - name: Build and push scipy-notebook
+        uses: docker/build-push-action@v3
+        with:
+          context: scipy-notebook
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.docker_meta_scipy-notebook.outputs.tags }}
+          labels: ${{ steps.docker_meta_scipy-notebook.outputs.labels }}
+          build-args: |
+           BASE_CONTAINER=marorro/base-notebook
+
+      - name: Docker meta datascience-notebook
+        id: docker_meta_datascience-notebook
+        uses: docker/metadata-action@v4
+        with:
+          images: marorro/datascience-notebook
+          tags: |
+            type=sha
+            latest
+      - name: Build and push datascience-notebook
+        uses: docker/build-push-action@v3
+        with:
+          context: datascience-notebook
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.docker_meta_datascience-notebook.outputs.tags }}
+          labels: ${{ steps.docker_meta_datascience-notebook.outputs.labels }}
+          build-args: |
+           BASE_CONTAINER=marorro/scipy-notebook
