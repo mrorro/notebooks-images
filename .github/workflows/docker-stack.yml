@@ -18,11 +18,12 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: jupyter/docker-stacks
+          ref: a374cab4fcb69d6b0de8f18252a507ffef3fa795
       - name: Docker meta
         id: docker_meta
         uses: docker/metadata-action@v4
         with:
-          images: marorro/docker-stacks-foundation
+          images: marorro/base-notebook
           tags: |
             type=sha
             latest
@@ -36,33 +37,15 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
         if: github.event_name != 'pull_request'
-      - name: Build and push docker-stacks-foundation
-        uses: docker/build-push-action@v3
-        with:
-          context: docker-stacks-foundation
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.docker_meta.outputs.tags }}
-          labels: ${{ steps.docker_meta.outputs.labels }}
-          build-args: |
-           ROOT_CONTAINER=nvidia/cuda:11.4.2-cudnn8-runtime-ubuntu20.04
-
-      - name: Docker meta base-notebook
-        id: docker_meta_base-notebook
-        uses: docker/metadata-action@v4
-        with:
-          images: marorro/base-notebook
-          tags: |
-            type=sha
-            latest
       - name: Build and push base-notebook
         uses: docker/build-push-action@v3
         with:
           context: base-notebook
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.docker_meta_base-notebook.outputs.tags }}
-          labels: ${{ steps.docker_meta_base-notebook.outputs.labels }}
+          tags: ${{ steps.docker_meta.outputs.tags }}
+          labels: ${{ steps.docker_meta.outputs.labels }}
           build-args: |
-           BASE_CONTAINER=marorro/docker-stacks-foundation
+           ROOT_CONTAINER=nvidia/cuda:11.4.2-cudnn8-runtime-ubuntu20.04
 
       - name: Docker meta minimal-notebook
         id: docker_meta_minimal-notebook
