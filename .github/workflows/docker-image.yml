@@ -12,11 +12,12 @@ jobs:
   x86_64-cuda-foundation:
     name: Build cuda jupyter docker-stacks
     runs-on: ubuntu-latest
-    outputs:
-      base: ${{ steps.docker_meta_base.outputs.tags }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Docker meta
+        id: docker_meta
+        uses: docker/metadata-action@v4
         with:
           images: jupyter/docker-stacks/docker-stacks-foundation/
           tags: |
