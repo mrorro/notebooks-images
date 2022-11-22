@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: jupyter/docker-stacks
-          ref: 59c973d16bca
+          ref: 59c973d16bcaf097800eb3f5541a5c2d874b42ae
       - name: Docker meta
         id: docker_meta
         uses: docker/metadata-action@v4
