@@ -9,7 +9,7 @@ on:
 
 jobs:
 
-  user-images:
+  cuda-foundation:
     name: Build and push images
     runs-on: ubuntu-latest
 
@@ -22,7 +22,7 @@ jobs:
         id: docker_meta
         uses: docker/metadata-action@v4
         with:
-          images: marorro/docker-stacks-foundation
+          images: marorro/cuda/docker-stacks-foundation
           tags: |
             type=sha
             latest
@@ -45,4 +45,3 @@ jobs:
           labels: ${{ steps.docker_meta.outputs.labels }}
           build-args: |
            ROOT_CONTAINER=nvidia/cuda:11.4.2-cudnn8-runtime-ubuntu20.04
-
