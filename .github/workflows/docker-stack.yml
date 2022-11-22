@@ -47,7 +47,7 @@ jobs:
            ROOT_CONTAINER=nvidia/cuda:11.4.2-cudnn8-runtime-ubuntu20.04
 
       - name: Docker meta x86_64-base
-        id: docker_meta
+        id: docker_meta_x86_64-base
         uses: docker/metadata-action@v4
         with:
           images: marorro/x86_64-base
