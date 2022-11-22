@@ -62,4 +62,4 @@ jobs:
           tags: ${{ steps.docker_meta_base-notebook.outputs.tags }}
           labels: ${{ steps.docker_meta_base-notebook.outputs.labels }}
           build-args: |
-           ROOT_CONTAINER=marorro/docker-stacks-foundation
+           BASE_CONTAINER=marorro/docker-stacks-foundation
