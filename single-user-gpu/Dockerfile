@@ -38,7 +38,7 @@ RUN mamba install -y --quiet \
     && conda clean --all
 
 # packages not in conda
-RUN python3 -m pip install --no-cache-dir \
+RUN pip install --no-cache-dir \
         shortid \
         nbgitpuller \
         git+https://github.com/EGI-Foundation/egi-notebooks-addons@0.1.3 \
@@ -46,9 +46,9 @@ RUN python3 -m pip install --no-cache-dir \
         nbtop \
         tflearn \
         jupyter-tensorboard-proxy \
-        mlflow-server-proxy 
+        mlflow-server-proxy \
+        tensorflow
 
-USER $NB_UID
 
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager jupyter-leaflet
 # Avoid a broken extension to show up
