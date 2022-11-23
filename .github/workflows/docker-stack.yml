@@ -1,4 +1,4 @@
-name: Build and push containers
+name: Build and push docker-stacks containers 
 
 on:
   push:
@@ -47,7 +47,8 @@ jobs:
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
           build-args: |
-           ROOT_CONTAINER=nvidia/cuda:11.4.2-cudnn8-runtime-ubuntu20.04
+            ROOT_CONTAINER=nvidia/cuda:11.3.0-cudnn8-runtime-ubuntu20.04
+#           ROOT_CONTAINER=nvidia/cuda:11.4.2-cudnn8-runtime-ubuntu20.04
 
       - name: Docker meta minimal-notebook
         id: docker_meta_minimal-notebook

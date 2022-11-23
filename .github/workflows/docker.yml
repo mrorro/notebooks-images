@@ -6,6 +6,10 @@ on:
     branches:
     - main
   pull_request:
+  workflow_run:
+    workflows: [Build and push docker-stacks containers]
+    types:
+      - completed
 
 jobs:
 

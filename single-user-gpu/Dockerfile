@@ -34,12 +34,8 @@ RUN mamba install -y --quiet \
         jupyterlab-git \
         jupyterlab-github \
         mlflow \
-        tensorflow=2.10.0=cuda112py38hded6998_0 \
-        pytorch=1.12.1=cuda112py38habe9d5a_200 \
-        torchvision \
-        && conda clean --all
-#     &&  mamba install pytorch torchvision torchaudio pytorch-cuda=11.6 -c pytorch -c nvidia \
-#     && conda clean --all
+    &&  mamba install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=11.3 -c pytorch \
+    && conda clean --all
 
 # packages not in conda
 RUN python3 -m pip install --no-cache-dir \
