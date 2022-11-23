@@ -33,7 +33,6 @@ RUN mamba install -y --quiet \
         jupyterlab-git \
         jupyterlab-github \
         mlflow 
-RUN  mamba install -y --quiet fastai -c fastai 
 RUN  mamba install pytorch torchvision torchaudio pytorch-cuda=11.6 -c pytorch -c nvidia \
      && conda clean --all
 
