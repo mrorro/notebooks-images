@@ -5,6 +5,8 @@ on:
     # only pushes on master so we don't push intermediate results to dockerhub
     branches:
     - main
+    paths:
+    - '.github/workflows/docker-stack.yml'
   pull_request:
 
 jobs:
