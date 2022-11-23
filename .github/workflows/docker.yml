@@ -16,14 +16,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Docker meta
-        id: docker_meta
-        uses: docker/metadata-action@v4
-        with:
-          images: marorro/notebooks-base
-          tags: |
-            type=sha
-            latest
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -33,14 +25,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-        if: github.event_name != 'pull_request'
-      - name: Build and push base-notebook
-        uses: docker/build-push-action@v3
-        with:
-          context: base
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.docker_meta.outputs.tags }}
-          labels: ${{ steps.docker_meta.outputs.labels }}
 
       - name: Docker meta gpu-notebook
         id: docker_meta_gpu-notebook
@@ -57,5 +41,3 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.docker_meta_gpu-notebook.outputs.tags }}
           labels: ${{ steps.docker_meta_gpu-notebook.outputs.labels }}
-          build-args: |
-           BASE_IMAGE=marorro/notebooks-base
