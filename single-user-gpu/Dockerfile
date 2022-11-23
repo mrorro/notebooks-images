@@ -16,6 +16,7 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+USER $NB_UID
 
 RUN mamba install -y --quiet \
         ipyleaflet \
@@ -33,11 +34,9 @@ RUN mamba install -y --quiet \
         jupyterlab-git \
         jupyterlab-github \
         mlflow \
-        tensorflow
-RUN  mamba install pytorch torchvision torchaudio pytorch-cuda=11.6 -c pytorch -c nvidia \
+        tensorflow \
+     &&  mamba install pytorch torchvision torchaudio pytorch-cuda=11.6 -c pytorch -c nvidia \
      && conda clean --all
-
-USER $NB_UID
 
 # packages not in conda
 RUN python3 -m pip install --no-cache-dir \
