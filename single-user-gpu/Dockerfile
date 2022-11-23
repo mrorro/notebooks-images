@@ -32,9 +32,9 @@ RUN mamba install -y --quiet \
 	graphviz \
 	jq \
         jupyterlab-git \
-        jupyterlab-github \
-        mlflow \
-    &&  mamba install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=11.3 -c pytorch \
+	jupyterlab-github \
+	mlflow \
+    &&  mamba install pytorch==1.12.1=py3.8_cuda11.3_cudnn8.3.2_0 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=11.3 -c pytorch \
     && conda clean --all
 
 # packages not in conda
