@@ -25,10 +25,10 @@ RUN mamba install -y --quiet \
 	jq \
         jupyterlab-git \
         jupyterlab-github \
-        mlflow \
-    && mamba install -y --quiet fastai -c fastai \
-    && mamba install pytorch torchvision torchaudio pytorch-cuda=11.6 -c pytorch -c nvidia \
-    && conda clean --all
+        mlflow #\
+#    && mamba install -y --quiet fastai -c fastai \
+#    && mamba install pytorch torchvision torchaudio pytorch-cuda=11.6 -c pytorch -c nvidia \
+#    && conda clean --all
 
 # Octave, install on a different environment
 # Octave from conda won't build packages
