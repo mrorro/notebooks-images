@@ -32,7 +32,8 @@ RUN mamba install -y --quiet \
 	jq \
         jupyterlab-git \
         jupyterlab-github \
-        mlflow 
+        mlflow \
+        tensorflow
 RUN  mamba install pytorch torchvision torchaudio pytorch-cuda=11.6 -c pytorch -c nvidia \
      && conda clean --all
 
@@ -47,8 +48,7 @@ RUN python3 -m pip install --no-cache-dir \
         nbtop \
         tflearn \
         jupyter-tensorboard-proxy \
-        mlflow-server-proxy \
-        tensorflow
+        mlflow-server-proxy 
 
 USER $NB_UID
 
