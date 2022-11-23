@@ -11,7 +11,6 @@ RUN mamba install -y --quiet \
 	psycopg2 \
 	boto3 \
 	folium \
-	tensorflow \
 	tqdm \
 	lxml \
 	pymongo \
@@ -19,7 +18,6 @@ RUN mamba install -y --quiet \
 	geopandas \
 	ipywidgets \
 	matplotlib \
-	scipy \
 	lightgbm \
 	eo-learn \
 	plotly \
@@ -27,7 +25,9 @@ RUN mamba install -y --quiet \
 	jq \
         jupyterlab-git \
         jupyterlab-github \
-    && mamba install -y --quiet pytorch torchvision fastai mlflow -c pytorch -c fastai \
+        mlflow \
+    && mamba install -y --quiet fastai -c fastai \
+    && mamba install pytorch torchvision torchaudio pytorch-cuda=11.6 -c pytorch -c nvidia \
     && conda clean --all
 
 # Octave, install on a different environment
@@ -48,30 +48,15 @@ RUN mamba install -y --quiet octave_kernel=0.32.0 \
     && jupyter kernelspec install "$SITE_PACKAGES/octave_kernel" --name octave --prefix /opt/conda \
     && conda clean --all
 
-#RUN conda config --add channels bioconda \
-#    && mamba install -y --quiet \
-#        biopython \
-#        blast \
-#        clustalw \
-#        emboss \
-#    && conda clean --all
-
 # packages not in conda
-RUN pip install --no-cache-dir \
+RUN python3 -m pip install --no-cache-dir \
         git+https://github.com/EGI-Foundation/egi-notebooks-addons@0.1.3 \
         h5glance \
         nbtop \
         tflearn \
         jupyter-tensorboard-proxy \
-        mlflow-server-proxy
-
-# EMSO
-# python3.7, install on a different environment
-#RUN mamba create --name python3.7 -y --quiet -c conda-forge ipython python=3.7 ipykernel \
-#    && $(conda run -n python3.7 /bin/bash -c "which python") -m ipykernel install --prefix /tmp --name Python-3.7 \
-#    && jupyter kernelspec install /tmp/share/jupyter/kernels/python-3.7/ --name Python-3.7 --prefix /opt/conda \
-#    && rm -rf /tmp/share \
-#    && conda clean --all
+        mlflow-server-proxy \
+        tensorflow
 
 USER root
 
