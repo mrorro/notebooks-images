@@ -12,25 +12,33 @@ RUN apt-get update \
         graphviz \
         vim \
         openssh-client \
-        libsndfile1 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+RUN curl https://raw.githubusercontent.com/kadwanev/retry/master/retry \
+         -o /usr/local/bin/retry && chmod +x /usr/local/bin/retry
+
 USER $NB_UID
 
-RUN mamba install -y --quiet \
+RUN conda install mamba -y --quiet -c conda-forge \
+    && mamba install -y -q \
+        r-plotly \
+        r-gdata \
+        rdflib \
+        prov \
+        graphviz \
+        pydot \
+        lxml \
+        geojson \
+        pydap \
+        xarray \
+        cartopy \
         ipyleaflet \
         jupyterlab==3.1.4 \
         notebook==6.4.1 \
         nbclassic==0.2.8 \
         jupyter-server-proxy \
         jinja2==3.0.3 \
-	geopandas \
-	ipywidgets \
-	matplotlib \
-	plotly \
-	graphviz \
-	jq \
         jupyterlab-git \
 	jupyterlab-github \
 	mlflow \
@@ -41,17 +49,12 @@ RUN mamba install -y --quiet \
 RUN pip install --no-cache-dir \
         shortid \
         nbgitpuller \
-        git+https://github.com/EGI-Foundation/egi-notebooks-addons@0.1.3 \
-        h5glance \
-        nbtop \
-        tflearn \
         jupyter-tensorboard-proxy \
         mlflow-server-proxy \
         tensorflow
 
+WORKDIR "${HOME}"
 
-RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager jupyter-leaflet
-# Avoid a broken extension to show up
-RUN jupyter labextension disable @pyviz/jupyterlab_pyviz
-
-RUN rmdir work
+RUN NODE_OPTIONS="--openssl-legacy-provider" \
+    jupyter labextension install \
+        @jupyter-widgets/jupyterlab-manager jupyter-leaflet
