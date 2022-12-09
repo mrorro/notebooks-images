@@ -24,17 +24,12 @@ RUN conda install mamba -y --quiet -c conda-forge \
     && mamba install -y -q \
         r-plotly \
         r-gdata \
-        rdflib 
+        rdflib \
+        graphviz \
+        lxml \
+        geojson \
+        xarray 
 #\
-#        prov \
-#        graphviz \
-#        pydot \
-#        lxml \
-#        geojson \
-#        pydap \
-#        xarray \
-#        cartopy \
-#        ipyleaflet \
 #        jupyterlab==3.1.4 \
 #        notebook==6.4.1 \
 #        nbclassic==0.2.8 \
