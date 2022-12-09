@@ -20,12 +20,12 @@ RUN curl https://raw.githubusercontent.com/kadwanev/retry/master/retry \
 
 USER $NB_UID
 
-RUN conda install mamba -y --quiet -c conda-forge 
+RUN conda install mamba -y --quiet -c conda-forge \
+    && mamba install -y -q \
+        r-plotly \
+        r-gdata \
+        rdflib 
 #\
-#    && mamba install -y -q \
-#        r-plotly \
-#        r-gdata \
-#        rdflib \
 #        prov \
 #        graphviz \
 #        pydot \
