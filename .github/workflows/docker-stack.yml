@@ -63,8 +63,8 @@ jobs:
         with:
           context: base-notebook
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.docker_meta_minimal-notebook.outputs.tags }}
-          labels: ${{ steps.docker_meta_minimal-notebook.outputs.labels }}
+          tags: ${{ steps.docker_meta_base-notebook.outputs.tags }}
+          labels: ${{ steps.docker_meta_base-notebook.outputs.labels }}
           build-args: |
            BASE_CONTAINER=marorro/docker-stacks-foundation
 
