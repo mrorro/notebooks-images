@@ -28,12 +28,12 @@ RUN conda install mamba -y --quiet -c conda-forge \
         graphviz \
         lxml \
         geojson \
-        xarray 
+        xarray \
+        jupyterlab==3.1.4 \
+        notebook==6.4.1 \
+        nbclassic==0.2.8 \
+        jupyter-server-proxy 
 #\
-#        jupyterlab==3.1.4 \
-#        notebook==6.4.1 \
-#        nbclassic==0.2.8 \
-#        jupyter-server-proxy \
 #        jinja2==3.0.3 \
 #        jupyterlab-git \
 #	jupyterlab-github \
