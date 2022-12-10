@@ -37,9 +37,9 @@ RUN conda install mamba -y --quiet -c conda-forge \
         jupyterlab-git \
 	jupyterlab-github \
 	mlflow \
-    &&  mamba install pytorch=1.12.1=py3.10_cuda11.3_cudnn8.3.2_0 torchvision torchaudio cudatoolkit -c pytorch
+#    &&  mamba install pytorch=1.12.1=py3.10_cuda11.3_cudnn8.3.2_0 torchvision torchaudio cudatoolkit -c pytorch
 #pytorch==1.12.1=py3.8_cuda11.3_cudnn8.3.2_0 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=11.3 -c pytorch \
-#    && conda clean --all
+     && conda clean --all
 
 # packages not in conda
 RUN pip install --no-cache-dir \
@@ -47,7 +47,11 @@ RUN pip install --no-cache-dir \
         nbgitpuller \
         jupyter-tensorboard-proxy \
         mlflow-server-proxy \
-        tensorflow
+        tensorflow \
+        torch==1.12.1+cu113 \
+        torchvision==0.13.1+cu113 \
+        torchaudio==0.12.1 \
+        --extra-index-url https://download.pytorch.org/whl/cu113
 
 WORKDIR "${HOME}"
 
