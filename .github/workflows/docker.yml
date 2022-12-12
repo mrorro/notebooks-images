@@ -30,6 +30,23 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Docker meta base
+        id: docker_meta_base
+        uses: docker/metadata-action@v4
+        with:
+          images: marorro/gpu-base
+          tags: |
+            type=sha
+            latest
+      - name: Build and push base
+        uses: docker/build-push-action@v3
+        with:
+          context: base
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.docker_meta_base.outputs.tags }}
+          labels: ${{ steps.docker_meta_base.outputs.labels }}
+
+
       - name: Docker meta gpu-notebook
         id: docker_meta_gpu-notebook
         uses: docker/metadata-action@v4
