@@ -28,9 +28,10 @@ RUN mamba install -y --quiet \
 	jupyterlab-git \
         jupyterlab-github \
         mlflow \
-	pytorch=1.12.1=py3.10_cuda11.3_cudnn8.3.2_0 \
-	torchvision \
-	torchaudio \
+        pytorch=1.12.1=py3.10_cuda11.3_cudnn8.3.2_0 \
+        torchvision \
+        torchaudio \
+        -c pytorch \
     && conda clean --all
 
 # mamba install pytorch=1.12.1=py3.10_cuda11.3_cudnn8.3.2_0 torchvision torchaudio cudatoolkit -c pytorch

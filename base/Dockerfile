@@ -1,5 +1,5 @@
 # 2022-11-21 is python 3.10.6
-FROM jupyter/datascience-notebook:2022-11-21
+FROM marorro/datascience-notebook:latest
 
 USER root
 
