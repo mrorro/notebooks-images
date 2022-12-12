@@ -30,10 +30,13 @@ RUN mamba install -y --quiet \
         mlflow \
     && conda clean --all
 
-RUN conda install -y --quiet \
-        pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=11.3 -c pytorch \
-    && conda clean --all
+#RUN conda install -y --quiet \
+#        pytorch==1.13.0==cuda112py310he33e0d6_200 torchvision torchaudio 
+#    && conda clean --all
 
+#pytorch 1.13.0 cuda112py310he33e0d6_200  conda-forge 
+#tensorflow 2.10.0 cuda112py310he87a039_0 conda-forge
+#pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=11.3 -c pytorch
 # Octave, install on a different environment
 # Octave from conda won't build packages
 # see https://discourse.jupyter.org/t/installing-octave-packages-with-binder/4206
