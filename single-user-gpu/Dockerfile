@@ -28,13 +28,12 @@ RUN mamba install -y --quiet \
 	jupyterlab-git \
         jupyterlab-github \
         mlflow \
-        pytorch=1.12.1=py3.10_cuda11.3_cudnn8.3.2_0 \
-        torchvision \
-        torchaudio \
-        -c pytorch \
     && conda clean --all
 
-# mamba install pytorch=1.12.1=py3.10_cuda11.3_cudnn8.3.2_0 torchvision torchaudio cudatoolkit -c pytorch
+RUN mamba install -y --quiet \
+        pytorch=1.12.1=py3.10_cuda11.3_cudnn8.3.2_0 torchvision torchaudio cudatoolkit -c pytorch \
+    && conda clean --all
+
 # Octave, install on a different environment
 # Octave from conda won't build packages
 # see https://discourse.jupyter.org/t/installing-octave-packages-with-binder/4206
