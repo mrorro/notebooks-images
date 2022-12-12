@@ -25,7 +25,7 @@ jobs:
         id: docker_meta
         uses: docker/metadata-action@v4
         with:
-          images: marorro/docker-stacks-foundation
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/docker-stacks-foundation
           tags: |
             type=sha
             latest
@@ -54,7 +54,7 @@ jobs:
         id: docker_meta_base-notebook
         uses: docker/metadata-action@v4
         with:
-          images: marorro/base-notebook
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/base-notebook
           tags: |
             type=sha
             latest
@@ -66,13 +66,13 @@ jobs:
           tags: ${{ steps.docker_meta_base-notebook.outputs.tags }}
           labels: ${{ steps.docker_meta_base-notebook.outputs.labels }}
           build-args: |
-           BASE_CONTAINER=marorro/docker-stacks-foundation
+           BASE_CONTAINER=${{ secrets.DOCKERHUB_USERNAME }}/docker-stacks-foundation
 
       - name: Docker meta minimal-notebook
         id: docker_meta_minimal-notebook
         uses: docker/metadata-action@v4
         with:
-          images: marorro/minimal-notebook
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/minimal-notebook
           tags: |
             type=sha
             latest
@@ -84,13 +84,13 @@ jobs:
           tags: ${{ steps.docker_meta_minimal-notebook.outputs.tags }}
           labels: ${{ steps.docker_meta_minimal-notebook.outputs.labels }}
           build-args: |
-           BASE_CONTAINER=marorro/base-notebook
+           BASE_CONTAINER=${{ secrets.DOCKERHUB_USERNAME }}/base-notebook
 
       - name: Docker meta scipy-notebook
         id: docker_meta_scipy-notebook
         uses: docker/metadata-action@v4
         with:
-          images: marorro/scipy-notebook
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/scipy-notebook
           tags: |
             type=sha
             latest
@@ -102,13 +102,13 @@ jobs:
           tags: ${{ steps.docker_meta_scipy-notebook.outputs.tags }}
           labels: ${{ steps.docker_meta_scipy-notebook.outputs.labels }}
           build-args: |
-           BASE_CONTAINER=marorro/minimal-notebook
+           BASE_CONTAINER=${{ secrets.DOCKERHUB_USERNAME }}/minimal-notebook
 
       - name: Docker meta datascience-notebook
         id: docker_meta_datascience-notebook
         uses: docker/metadata-action@v4
         with:
-          images: marorro/datascience-notebook
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/datascience-notebook
           tags: |
             type=sha
             latest
@@ -120,4 +120,4 @@ jobs:
           tags: ${{ steps.docker_meta_datascience-notebook.outputs.tags }}
           labels: ${{ steps.docker_meta_datascience-notebook.outputs.labels }}
           build-args: |
-           BASE_CONTAINER=marorro/scipy-notebook
+           BASE_CONTAINER=${{ secrets.DOCKERHUB_USERNAME }}/scipy-notebook
